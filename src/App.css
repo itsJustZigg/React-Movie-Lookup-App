@@ -1,0 +1,63 @@
+.movie-modal {
+  position: absolute;
+  width: 800px;
+  height: 250px;
+  z-index: 9999;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #4b5796;
+  display: flex;
+  
+}
+
+.modal-content{
+  text-align: left;
+  padding-left: 10px;
+
+}
+.modal-content > h1 {
+  text-align: center;
+}
+
+.search-form{
+  margin: 10px 0px;
+}
+
+input {
+  min-height: 40px;
+  min-width: 500px;
+  font-size: 15pt;
+}
+
+button{
+  min-height: 46px;
+  min-width: 100px;
+}
+
+
+.movie-grid {
+  display: grid;
+  /* grid-auto-flow: column; */
+  justify-items: center;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.movie-card {
+  width: 200px;
+  background-color: #2b2d38;
+  margin-bottom: 40px;
+}
+
+.movie-card:hover {
+  background-color: #54586e;
+}
+
+.movie-poster {
+  max-width: 100%;
+}
+
+h1, h2{
+  padding: 4px;
+  font-size: 0.7em;
+}
