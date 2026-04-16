@@ -17,18 +17,20 @@ function HomePage({children}){
 
 // rated, boxOffice, poster, movieTitle, releaseYear, actors, synopsis
 
-function MovieModal({foundMovie}){
+function MovieModal({handleModalClose, foundMovie}){
   console.log(foundMovie)
   return (
-    <div className='movie-modal'>
-      <img className="modal-poster"  src={foundMovie.Poster}/>
-      <div className='modal-content'>
-        <h1>{foundMovie.Title}</h1>
-        <h2>Year: {foundMovie.Year}</h2>
-        <h2>Cast: {foundMovie.Actors}</h2>
-        <h2>Rated: {foundMovie.Rated}</h2>
-        <h2>Box Office: {foundMovie.BoxOffice}</h2>
-        <h2>Synopsis: {foundMovie.Plot}</h2>
+    <div onClick={handleModalClose} className='overlay'>
+      <div className='movie-modal'>
+        <img className="modal-poster"  src={foundMovie.Poster}/>
+        <div className='modal-content'>
+          <h1>{foundMovie.Title}</h1>
+          <h2>Year: {foundMovie.Year}</h2>
+          <h2>Cast: {foundMovie.Actors}</h2>
+          <h2>Rated: {foundMovie.Rated}</h2>
+          <h2>Box Office: {foundMovie.BoxOffice}</h2>
+          <h2>Synopsis: {foundMovie.Plot}</h2>
+        </div>
       </div>
     </div>
   )
@@ -102,8 +104,8 @@ function App() {
   //input searchdata into the query params
     useEffect(() => {
       async function fetchMovie() {
-        const result = await fetch(`http://www.omdbapi.com/?t=${query}&apikey=${apikey}`)
-          .then(response => response.json())
+        const response = await fetch(`http://www.omdbapi.com/?t=${query}&apikey=${apikey}`)
+        const result = await response.json()
           setFeaturedMovies([result])
           console.log(result)
       }
@@ -131,15 +133,19 @@ function App() {
   }
 
   function handleCardClick(movieId){
-    setIsOpen(!isOpen)
+    setIsOpen(true)
     setFoundMovie(featuredMovies.find(movie => movie.imdbID === movieId))
+  }
+
+  function handleModalClose(){
+    setIsOpen(false)
   }
 
   return (
     <>
       <SearchBar setSearchTerm={setSearchTerm} 
       handleSubmit={handleSubmit}/>
-      {isOpen && <MovieModal foundMovie={foundMovie}></MovieModal>}
+      {isOpen && <MovieModal handleModalClose={handleModalClose} foundMovie={foundMovie}></MovieModal>}
       
 
       <MovieGrid>
