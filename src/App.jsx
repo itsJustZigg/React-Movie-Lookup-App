@@ -104,10 +104,9 @@ function App() {
   //input searchdata into the query params
     useEffect(() => {
       async function fetchMovie() {
-        const response = await fetch(`http://www.omdbapi.com/?t=${query}&apikey=${apikey}`)
+        const response = await fetch(`https://www.omdbapi.com/?t=${query}&apikey=${apikey}`)
         const result = await response.json()
-          setFeaturedMovies([result])
-          console.log(result)
+          setFeaturedMovies([result])  
       }
       fetchMovie()
     }, [query])
@@ -117,7 +116,7 @@ function App() {
   useEffect(() => {
     async function fetchMovies() {
       const results = await Promise.all(
-        featuredIds.map(id => fetch(`http://www.omdbapi.com/?i=${id}&apikey=${apikey}`)
+        featuredIds.map(id => fetch(`https://www.omdbapi.com/?i=${id}&apikey=${apikey}`)
           .then(response => response.json())
         )
       )
